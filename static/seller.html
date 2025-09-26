@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уточняющие вопросы по ТЗ продавца (Wavy)</title>
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="status" class="status"></div>
+
+<h1>Уточняющие вопросы по ТЗ продавца (Wavy)</h1>
+
+<!-- Контейнер для кнопок -->
+<div class="button-container">
+    <!-- Кнопка "На главную" -->
+    <a href="/" class="action-button btn-primary">На главную</a>
+    <!-- Кнопка "Скачать Markdown" -->
+    <button id="downloadMarkdownBtn" class="action-button btn-success">Скачать как Markdown</button>
+</div>
+
+<div class="section critical">
+    <h2>Критически важные вопросы (блокируют разработку)</h2>
+
+    <h3>1. Передача API-ключа аутентификации</h3>
+    <ul>
+        <li><input type="checkbox" id="q1_opt1" data-md-id="q_seller"><label for="q1_opt1">В заголовке Authorization: Bearer {API_KEY}</label></li>
+        <li><input type="checkbox" id="q1_opt2" data-md-id="q_seller"><label for="q1_opt2">В заголовке X-API-Key: {API_KEY}</label></li>
+        <li><input type="checkbox" id="q1_opt3" data-md-id="q_seller"><label for="q1_opt3">В query параметре: ?api_key={API_KEY}</label></li>
+        <li><input type="checkbox" id="q1_opt4" data-md-id="q_seller"><label for="q1_opt4">В теле запроса для POST методов</label></li>
+    </ul>
+
+    <h3>2. Обработка удаления несуществующего товара</h3>
+    <ul>
+        <li><input type="checkbox" id="q2_opt1" data-md-id="q_seller"><label for="q2_opt1">Возвращать 404 Not Found если товар не существует</label></li>
+        <li><input type="checkbox" id="q2_opt2" data-md-id="q_seller"><label for="q2_opt2">Возвращать 200 OK (идемпотентная операция)</label></li>
+        <li><input type="checkbox" id="q2_opt3" data-md-id="q_seller"><label for="q2_opt3">Возвращать 400 Bad Request с сообщением об ошибке</label></li>
+    </ul>
+
+    <h3>3. Структура идентификаторов в отзывах</h3>
+    <ul>
+        <li><input type="checkbox" id="q3_opt1" data-md-id="q_seller"><label for="q3_opt1">id в FeedbackDTO - это ID отзыва (исправить описание)</label></li>
+        <li><input type="checkbox" id="q3_opt2" data-md-id="q_seller"><label for="q3_opt2">id в FeedbackDTO - это ID товара (дублирование, убрать)</label></li>
+        <li><input type="checkbox" id="q3_opt3" data-md-id="q_seller"><label for="q3_opt3">Добавить отдельное поле productId для связи с товаром</label></li>
+    </ul>
+
+    <h3>4. Пагинация для списков товаров и отзывов</h3>
+    <ul>
+        <li><input type="checkbox" id="q4_opt1" data-md-id="q_seller"><label for="q4_opt1">Без пагинации - возвращать все данные сразу</label></li>
+        <li><input type="checkbox" id="q4_opt2" data-md-id="q_seller"><label for="q4_opt2">Пагинация по страницам: page/size параметры</label></li>
+        <li><input type="checkbox" id="q4_opt3" data-md-id="q_seller"><label for="q4_opt3">Пагинация по курсору: limit/offset параметры</label></li>
+        <li><input type="checkbox" id="q4_opt4" data-md-id="q_seller"><label for="q4_opt4">Фиксированный лимит на страницу (например, 20 элементов)</label></li>
+    </ul>
+</div>
+
+<div class="section important">
+    <h2>Важные функциональные вопросы</h2>
+
+    <h3>5. Перечень допустимых категорий товаров</h3>
+    <ul>
+        <li><input type="checkbox" id="q5_opt1" data-md-id="q_seller"><label for="q5_opt1">Электроника, Одежда, Косметика, Продукты, Книги</label></li>
+        <li><input type="checkbox" id="q5_opt2" data-md-id="q_seller"><label for="q5_opt2">Список из 10-15 основных категорий Wildberries</label></li>
+        <li><input type="checkbox" id="q5_opt3" data-md-id="q_seller"><label for="q5_opt3">Динамический список - можно добавлять новые категории</label></li>
+        <li><input type="checkbox" id="q5_opt4" data-md-id="q_seller"><label for="q5_opt4">Фиксированный enum как в спецификации OpenAPI</label></li>
+    </ul>
+
+    <h3>6. Формат поля period в графике продаж</h3>
+    <ul>
+        <li><input type="checkbox" id="q6_opt1" data-md-id="q_seller"><label for="q6_opt1">"Январь 2025", "Февраль 2025" (полное название)</label></li>
+        <li><input type="checkbox" id="q6_opt2" data-md-id="q_seller"><label for="q6_opt2">"2025-01", "2025-02" (стандартный формат для сортировки)</label></li>
+        <li><input type="checkbox" id="q6_opt3" data-md-id="q_seller"><label for="q6_opt3">"Jan", "Feb" (короткое название)</label></li>
+        <li><input type="checkbox" id="q6_opt4" data-md-id="q_seller"><label for="q6_opt4">"01.2025", "02.2025" (числовой формат)</label></li>
+    </ul>
+
+    <h3>7. Ограничения для генерируемых товаров</h3>
+    <ul>
+        <li><input type="checkbox" id="q7_opt1" data-md-id="q_seller"><label for="q7_opt1">Цена: 100-10 000 рублей</label></li>
+        <li><input type="checkbox" id="q7_opt2" data-md-id="q_seller"><label for="q7_opt2">Наличие: 0-1000 штук на складе</label></li>
+        <li><input type="checkbox" id="q7_opt3" data-md-id="q_seller"><label for="q7_opt3">Рейтинг: 1.0-5.0 звезд</label></li>
+        <li><input type="checkbox" id="q7_opt4" data-md-id="q_seller"><label for="q7_opt4">Описание: 50-500 символов</label></li>
+        <li><input type="checkbox" id="q7_opt5" data-md-id="q_seller"><label for="q7_opt5">Без ограничений - полностью случайные значения</label></li>
+    </ul>
+
+    <h3>8. Поддержка нескольких фото в отзывах</h3>
+    <ul>
+        <li><input type="checkbox" id="q8_opt1" data-md-id="q_seller"><label for="q8_opt1">Только одно фото (photoUrl как строка)</label></li>
+        <li><input type="checkbox" id="q8_opt2" data-md-id="q_seller"><label for="q8_opt2">Несколько фото (photoUrls как массив строк)</label></li>
+        <li><input type="checkbox" id="q8_opt3" data-md-id="q_seller"><label for="q8_opt3">Без фото - только текстовые отзывы</label></li>
+        <li><input type="checkbox" id="q8_opt4" data-md-id="q_seller"><label for="q8_opt4">Опционально одно или несколько фото</label></li>
+    </ul>
+
+    <h3>9. Привязка товаров к продавцу</h3>
+    <ul>
+        <li><input type="checkbox" id="q9_opt1" data-md-id="q_seller"><label for="q9_opt1">Все товары общие для всех продавцов</label></li>
+        <li><input type="checkbox" id="q9_opt2" data-md-id="q_seller"><label for="q9_opt2">Товары привязаны к API-ключу (только свои товары)</label></li>
+        <li><input type="checkbox" id="q9_opt3" data-md-id="q_seller"><label for="q9_opt3">Смешанный режим: общий каталог + личные товары</label></li>
+        <li><input type="checkbox" id="q9_opt4" data-md-id="q_seller"><label for="q9_opt4">Возможность просматривать чужие товары, но редактировать только свои</label></li>
+    </ul>
+</div>
+
+<div class="section important">
+    <h2>Вопросы по бизнес-логике</h2>
+
+    <h3>10. Валидация операций с товарами</h3>
+    <ul>
+        <li><input type="checkbox" id="q10_opt1" data-md-id="q_seller"><label for="q10_opt1">Проверять права на удаление только своих товаров</label></li>
+        <li><input type="checkbox" id="q10_opt2" data-md-id="q_seller"><label for="q10_opt2">Любой продавец может удалить любой товар</label></li>
+        <li><input type="checkbox" id="q10_opt3" data-md-id="q_seller"><label for="q10_opt3">Удаление только товаров с isRemovable=true</label></li>
+        <li><input type="checkbox" id="q10_opt4" data-md-id="q_seller"><label for="q10_opt4">Дополнительные бизнес-правила для удаления</label></li>
+    </ul>
+
+    <h3>11. Расчет процента возвратов (refundsPercent)</h3>
+    <ul>
+        <li><input type="checkbox" id="q11_opt1" data-md-id="q_seller"><label for="q11_opt1">refundsCount / totalSalesCount * 100</label></li>
+        <li><input type="checkbox" id="q11_opt2" data-md-id="q_seller"><label for="q11_opt2">refundsAmount / totalSalesAmount * 100</label></li>
+        <li><input type="checkbox" id="q11_opt3" data-md-id="q_seller"><label for="q11_opt3">Сложный алгоритм с учетом времени и суммы</label></li>
+        <li><input type="checkbox" id="q11_opt4" data-md-id="q_seller"><label for="q11_opt4">Фиксированное значение для демо-версии</label></li>
+    </ul>
+
+    <h3>12. Обновление статистики в реальном времени</h3>
+    <ul>
+        <li><input type="checkbox" id="q12_opt1" data-md-id="q_seller"><label for="q12_opt1">Статистика обновляется в реальном времени</label></li>
+        <li><input type="checkbox" id="q12_opt2" data-md-id="q_seller"><label for="q12_opt2">Кэширование данных на 5-15 минут</label></li>
+        <li><input type="checkbox" id="q12_opt3" data-md-id="q_seller"><label for="q12_opt3">Ежедневное обновление в фоне</label></li>
+        <li><input type="checkbox" id="q12_opt4" data-md-id="q_seller"><label for="q12_opt4">Статические данные для демо-версии</label></li>
+    </ul>
+
+    <h3>13. Время жизни сгенерированных товаров</h3>
+    <ul>
+        <li><input type="checkbox" id="q13_opt1" data-md-id="q_seller"><label for="q13_opt1">Товары сохраняются постоянно</label></li>
+        <li><input type="checkbox" id="q13_opt2" data-md-id="q_seller"><label for="q13_opt2">Автоматическое удаление через 24 часа</label></li>
+        <li><input type="checkbox" id="q13_opt3" data-md-id="q_seller"><label for="q13_opt3">Ограничение на количество товаров у одного продавца</label></li>
+        <li><input type="checkbox" id="q13_opt4" data-md-id="q_seller"><label for="q13_opt4">Ротация товаров по времени или количеству</label></li>
+    </ul>
+</div>
+
+<div class="section additional">
+    <h2>Технические вопросы реализации</h2>
+
+    <h3>14. Формат ошибок при нестандартных сценариях</h3>
+    <ul>
+        <li><input type="checkbox" id="q14_opt1" data-md-id="q_seller"><label for="q14_opt1">Всегда 200 OK с полем error в теле</label></li>
+        <li><input type="checkbox" id="q14_opt2" data-md-id="q_seller"><label for="q14_opt2">Стандартные HTTP коды (400, 404, 500)</label></li>
+        <li><input type="checkbox" id="q14_opt3" data-md-id="q_seller"><label for="q14_opt3">Гибридный подход: 200 для бизнес-ошибок, 5xx для технических</label></li>
+        <li><input type="checkbox" id="q14_opt4" data-md-id="q_seller"><label for="q14_opt4">Детализированные ошибки с кодами и сообщениями</label></li>
+    </ul>
+
+    <h3>15. Поддержка опциональных полей в API</h3>
+    <ul>
+        <li><input type="checkbox" id="q15_opt1" data-md-id="q_seller"><label for="q15_opt1">Все необязательные поля могут отсутствовать или быть null</label></li>
+        <li><input type="checkbox" id="q15_opt2" data-md-id="q_seller"><label for="q15_opt2">Необязательные поля всегда присутствуют, но могут быть null</label></li>
+        <li><input type="checkbox" id="q15_opt3" data-md-id="q_seller"><label for="q15_opt3">Разные стратегии для разных полей</label></li>
+        <li><input type="checkbox" id="q15_opt4" data-md-id="q_seller"><label for="q15_opt4">Строгая валидация - все поля обязательны</label></li>
+    </ul>
+
+    <h3>16. Валидация входных данных</h3>
+    <ul>
+        <li><input type="checkbox" id="q16_opt1" data-md-id="q_seller"><label for="q16_opt1">Проверка типов данных и форматов</label></li>
+        <li><input type="checkbox" id="q16_opt2" data-md-id="q_seller"><label for="q16_opt2">Проверка бизнес-логики (ценность > 0 и т.д.)</label></li>
+        <li><input type="checkbox" id="q16_opt3" data-md-id="q_seller"><label for="q16_opt3">Базовая валидация только на уровне типов</label></li>
+        <li><input type="checkbox" id="q16_opt4" data-md-id="q_seller"><label for="q16_opt4">Подробные сообщения об ошибках валидации</label></li>
+    </ul>
+</div>
+
+<div class="section additional">
+    <h2>Дополнительные вопросы</h2>
+
+    <h3>17. Сортировка товаров в списках</h3>
+    <ul>
+        <li><input type="checkbox" id="q17_opt1" data-md-id="q_seller"><label for="q17_opt1">По дате добавления (новые сначала)</label></li>
+        <li><input type="checkbox" id="q17_opt2" data-md-id="q_seller"><label for="q17_opt2">По цене (возрастание/убывание)</label></li>
+        <li><input type="checkbox" id="q17_opt3" data-md-id="q_seller"><label for="q17_opt3">По популярности (количество заказов)</label></li>
+        <li><input type="checkbox" id="q17_opt4" data-md-id="q_seller"><label for="q17_opt4">По рейтингу (высокий сначала)</label></li>
+        <li><input type="checkbox" id="q17_opt5" data-md-id="q_seller"><label for="q17_opt5">Фиксированная сортировка как в базе</label></li>
+    </ul>
+
+    <h3>18. Поддержка поиска и фильтрации</h3>
+    <ul>
+        <li><input type="checkbox" id="q18_opt1" data-md-id="q_seller"><label for="q18_opt1">Поиск по названию товара</label></li>
+        <li><input type="checkbox" id="q18_opt2" data-md-id="q_seller"><label for="q18_opt2">Фильтрация по категории</label></li>
+        <li><input type="checkbox" id="q18_opt3" data-md-id="q_seller"><label for="q18_opt3">Фильтрация по диапазону цен</label></li>
+        <li><input type="checkbox" id="q18_opt4" data-md-id="q_seller"><label for="q18_opt4">Поиск по артикулу</label></li>
+        <li><input type="checkbox" id="q18_opt5" data-md-id="q_seller"><label for="q18_opt5">Без поиска и фильтрации в MVP</label></li>
+    </ul>
+
+    <h3>19. Формат изображений товаров</h3>
+    <ul>
+        <li><input type="checkbox" id="q19_opt1" data-md-id="q_seller"><label for="q19_opt1">Полные URL (https://example.com/image.jpg)</label></li>
+        <li><input type="checkbox" id="q19_opt2" data-md-id="q_seller"><label for="q19_opt2">Относительные пути (images/product1.jpg)</label></li>
+        <li><input type="checkbox" id="q19_opt3" data-md-id="q_seller"><label for="q19_opt3">ID изображений для загрузки через отдельный эндпоинт</label></li>
+        <li><input type="checkbox" id="q19_opt4" data-md-id="q_seller"><label for="q19_opt4">Base64 кодированные изображения в JSON</label></li>
+    </ul>
+
+    <h3>20. Локализация и мультиязычность</h3>
+    <ul>
+        <li><input type="checkbox" id="q20_opt1" data-md-id="q_seller"><label for="q20_opt1">Только русский язык</label></li>
+        <li><input type="checkbox" id="q20_opt2" data-md-id="q_seller"><label for="q20_opt2">Поддержка русского и английского</label></li>
+        <li><input type="checkbox" id="q20_opt3" data-md-id="q_seller"><label for="q20_opt3">Определение языка через заголовок Accept-Language</label></li>
+        <li><input type="checkbox" id="q20_opt4" data-md-id="q_seller"><label for="q20_opt4">Язык фиксирован для всего API</label></li>
+    </ul>
+</div>
+</body>
+</html>

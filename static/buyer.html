@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Уточняющие вопросы по ТЗ бэкенда доставки</title>
+
+  <script src="script.js"></script>
+  <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="status" class="status"></div>
+
+<h1>Уточняющие вопросы по ТЗ бэкенда доставки</h1>
+
+<!-- Контейнер для кнопок -->
+<div class="button-container">
+  <!-- Кнопка "На главную" -->
+  <a href="/" class="action-button btn-primary">На главную</a>
+  <!-- Кнопка "Скачать Markdown" -->
+  <button id="downloadMarkdownBtn" class="action-button btn-success">Скачать как Markdown</button>
+</div>
+
+<div class="section critical">
+  <h2>Критически важные вопросы (блокируют разработку)</h2>
+
+  <h3>1. Механизм аутентификации и управления сессиями</h3>
+  <ul>
+    <li><input type="checkbox" id="q1_opt1" data-md-id="q_buyer"><label for="q1_opt1">Статические JWT токены без серверного logout</label></li>
+    <li><input type="checkbox" id="q1_opt2" data-md-id="q_buyer"><label for="q1_opt2">JWT с blacklist токенов для инвалидации на сервере</label></li>
+    <li><input type="checkbox" id="q1_opt3" data-md-id="q_buyer"><label for="q1_opt3">Сессионная аутентификация с хранением сессий в БД</label></li>
+    <li><input type="checkbox" id="q1_opt4" data-md-id="q_buyer"><label for="q1_opt4">Refresh tokens для автоматического обновления access токенов</label></li>
+  </ul>
+
+  <h3>2. Подтверждение контактных данных пользователя</h3>
+  <ul>
+    <li><input type="checkbox" id="q2_opt1" data-md-id="q_buyer"><label for="q2_opt1">Email требует подтверждения через ссылку</label></li>
+    <li><input type="checkbox" id="q2_opt2" data-md-id="q_buyer"><label for="q2_opt2">Телефон требует подтверждения через SMS-код</label></li>
+    <li><input type="checkbox" id="q2_opt3" data-md-id="q_buyer"><label for="q2_opt3">Подтверждение не требуется для email</label></li>
+    <li><input type="checkbox" id="q2_opt4" data-md-id="q_buyer"><label for="q2_opt4">Подтверждение не требуется для телефона</label></li>
+  </ul>
+
+  <h3>3. Парольная политика при регистрации</h3>
+  <ul>
+    <li><input type="checkbox" id="q3_opt1" data-md-id="q_buyer"><label for="q3_opt1">Минимальная длина 6 символов</label></li>
+    <li><input type="checkbox" id="q3_opt2" data-md-id="q_buyer"><label for="q3_opt2">Минимальная длина 8 символов + буквы и цифры</label></li>
+    <li><input type="checkbox" id="q3_opt3" data-md-id="q_buyer"><label for="q3_opt3">Сложный пароль: 8+ символов, буквы в разных регистрах, цифры, спецсимволы</label></li>
+    <li><input type="checkbox" id="q3_opt4" data-md-id="q_buyer"><label for="q3_opt4">Без специальных требований к сложности</label></li>
+  </ul>
+
+  <h3>4. Процесс оплаты и интеграция с платежными системами</h3>
+  <ul>
+    <li><input type="checkbox" id="q4_opt1" data-md-id="q_buyer"><label for="q4_opt1">Единый запрос: создание заказа + немедленная оплата</label></li>
+    <li><input type="checkbox" id="q4_opt2" data-md-id="q_buyer"><label for="q4_opt2">Двухэтапный процесс: создание заказа → отдельный запрос на оплату</label></li>
+    <li><input type="checkbox" id="q4_opt3" data-md-id="q_buyer"><label for="q4_opt3">Поддержка только внешних платежных систем (Stripe/YooMoney)</label></li>
+    <li><input type="checkbox" id="q4_opt4" data-md-id="q_buyer"><label for="q4_opt4">Поддержка внутреннего кошелька как основного метода оплаты</label></li>
+    <li><input type="checkbox" id="q4_opt5" data-md-id="q_buyer"><label for="q4_opt5">Гибридный подход: кошелек + внешние платежные системы</label></li>
+  </ul>
+
+  <h3>5. Обработка конкурентных запросов при изменении наличия товаров</h3>
+  <ul>
+    <li><input type="checkbox" id="q5_opt1" data-md-id="q_buyer"><label for="q5_opt1">Пессимистичная блокировка: резервирование товаров при добавлении в корзину</label></li>
+    <li><input type="checkbox" id="q5_opt2" data-md-id="q_buyer"><label for="q5_opt2">Оптимистичная блокировка: проверка наличия только при оформлении заказа</label></li>
+    <li><input type="checkbox" id="q5_opt3" data-md-id="q_buyer"><label for="q5_opt3">Версионность товаров: каждый заказ фиксирует версию данных товара</label></li>
+    <li><input type="checkbox" id="q5_opt4" data-md-id="q_buyer"><label for="q5_opt4">Очередь запросов на оформление заказов</label></li>
+  </ul>
+
+  <h3>6. Определение координат для адресов доставки</h3>
+  <ul>
+    <li><input type="checkbox" id="q6_opt1" data-md-id="q_buyer"><label for="q6_opt1">Клиент самостоятельно определяет и передает координаты (lat, lon)</label></li>
+    <li><input type="checkbox" id="q6_opt2" data-md-id="q_buyer"><label for="q6_opt2">Бэкенд преобразует текстовый адрес в координаты через API карт</label></li>
+    <li><input type="checkbox" id="q6_opt3" data-md-id="q_buyer"><label for="q6_opt3">Смешанный подход: приоритет координатам от клиента, fallback к геокодированию</label></li>
+    <li><input type="checkbox" id="q6_opt4" data-md-id="q_buyer"><label for="q6_opt4">Обязательная валидация адреса через сервис карт</label></li>
+  </ul>
+</div>
+
+<div class="section important">
+  <h2>Важные функциональные вопросы</h2>
+
+  <h3>7. Архитектура хранения данных корзины</h3>
+  <ul>
+    <li><input type="checkbox" id="q7_opt1" data-md-id="q_buyer"><label for="q7_opt1">Временное хранение в Redis (высокая производительность, очистка после заказа)</label></li>
+    <li><input type="checkbox" id="q7_opt2" data-md-id="q_buyer"><label for="q7_opt2">Постоянное хранение в PostgreSQL (сохранение между сессиями)</label></li>
+    <li><input type="checkbox" id="q7_opt3" data-md-id="q_buyer"><label for="q7_opt3">Гибридный подход: Redis для активной корзины + синхронизация в PostgreSQL</label></li>
+  </ul>
+
+  <h3>8. Параметры пагинации для списков</h3>
+  <ul>
+    <li><input type="checkbox" id="q8_opt1" data-md-id="q_buyer"><label for="q8_opt1">Классическая пагинация: limit/offset</label></li>
+    <li><input type="checkbox" id="q8_opt2" data-md-id="q_buyer"><label for="q8_opt2">Современная пагинация: page/size с указанием общего количества</label></li>
+    <li><input type="checkbox" id="q8_opt3" data-md-id="q_buyer"><label for="q8_opt3">Курсорная пагинация для больших наборов данных</label></li>
+  </ul>
+
+  <h3>9. Параметры сортировки товаров в каталоге</h3>
+  <ul>
+    <li><input type="checkbox" id="q9_opt1" data-md-id="q_buyer"><label for="q9_opt1">По популярности (количество покупок)</label></li>
+    <li><input type="checkbox" id="q9_opt2" data-md-id="q_buyer"><label for="q9_opt2">По дате добавления (новинки first)</label></li>
+    <li><input type="checkbox" id="q9_opt3" data-md-id="q_buyer"><label for="q9_opt3">По цене (возрастание/убывание)</label></li>
+    <li><input type="checkbox" id="q9_opt4" data-md-id="q_buyer"><label for="q9_opt4">По рейтингу (средняя оценка)</label></li>
+    <li><input type="checkbox" id="q9_opt5" data-md-id="q_buyer"><label for="q9_opt5">По алфавиту (название товара)</label></li>
+  </ul>
+
+  <h3>10. Поддерживаемые фильтры для каталога товаров</h3>
+  <ul>
+    <li><input type="checkbox" id="q10_opt1" data-md-id="q_buyer"><label for="q10_opt1">Фильтр по категории/подкатегории</label></li>
+    <li><input type="checkbox" id="q10_opt2" data-md-id="q_buyer"><label for="q10_opt2">Фильтр по диапазону цен</label></li>
+    <li><input type="checkbox" id="q10_opt3" data-md-id="q_buyer"><label for="q10_opt3">Фильтр по наличию (в наличии/под заказ)</label></li>
+    <li><input type="checkbox" id="q10_opt4" data-md-id="q_buyer"><label for="q10_opt4">Фильтр по рейтингу (минимальный рейтинг)</label></li>
+    <li><input type="checkbox" id="q10_opt5" data-md-id="q_buyer"><label for="q10_opt5">Фильтр по производителю/бренду</label></li>
+    <li><input type="checkbox" id="q10_opt6" data-md-id="q_buyer"><label for="q10_opt6">Текстовый поиск по названию и описанию</label></li>
+  </ul>
+
+  <h3>11. Стратегия хранения файлов изображений товаров</h3>
+  <ul>
+    <li><input type="checkbox" id="q11_opt1" data-md-id="q_buyer"><label for="q11_opt1">Локальное файловое хранилище на сервере</label></li>
+    <li><input type="checkbox" id="q11_opt2" data-md-id="q_buyer"><label for="q11_opt2">Облачное объектное хранилище (Amazon S3, Yandex Object Storage)</label></li>
+    <li><input type="checkbox" id="q11_opt3" data-md-id="q_buyer"><label for="q11_opt3">Гибридное решение: оригиналы в облаке + кэш на сервере</label></li>
+    <li><input type="checkbox" id="q11_opt4" data-md-id="q_buyer"><label for="q11_opt4">CDN для раздачи статических файлов</label></li>
+  </ul>
+
+  <h3>12. События для отправки push-уведомлений</h3>
+  <ul>
+    <li><input type="checkbox" id="q12_opt1" data-md-id="q_buyer"><label for="q12_opt1">Изменение статуса заказа</label></li>
+    <li><input type="checkbox" id="q12_opt2" data-md-id="q_buyer"><label for="q12_opt2">Поступление новых товаров в категориях интереса</label></li>
+    <li><input type="checkbox" id="q12_opt3" data-md-id="q_buyer"><label for="q12_opt3">Специальные предложения и акции</label></li>
+    <li><input type="checkbox" id="q12_opt4" data-md-id="q_buyer"><label for="q12_opt4">Напоминания о брошенной корзине</label></li>
+    <li><input type="checkbox" id="q12_opt5" data-md-id="q_buyer"><label for="q12_opt5">Информация о доставке (курьер выехал)</label></li>
+  </ul>
+
+  <h3>13. Механизм определения языка интерфейса</h3>
+  <ul>
+    <li><input type="checkbox" id="q13_opt1" data-md-id="q_buyer"><label for="q13_opt1">Заголовок Accept-Language HTTP запроса</label></li>
+    <li><input type="checkbox" id="q13_opt2" data-md-id="q_buyer"><label for="q13_opt2">Явный параметр в URL (?lang=ru)</label></li>
+    <li><input type="checkbox" id="q13_opt3" data-md-id="q_buyer"><label for="q13_opt3">Настройка в профиле пользователя</label></li>
+    <li><input type="checkbox" id="q13_opt4" data-md-id="q_buyer"><label for="q13_opt4">Определение по локали устройства (из app метаданных)</label></li>
+  </ul>
+</div>
+
+<div class="section important">
+  <h2>Вопросы по интеграции кошелька</h2>
+
+  <h3>14. Архитектурный подход к реализации кошелька</h3>
+  <ul>
+    <li><input type="checkbox" id="q14_opt1" data-md-id="q_buyer"><label for="q14_opt1">Монолитная архитектура: общая БД с основным сервисом</label></li>
+    <li><input type="checkbox" id="q14_opt2" data-md-id="q_buyer"><label for="q14_opt2">Микросервисная архитектура: отдельный сервис кошелька с API</label></li>
+    <li><input type="checkbox" id="q14_opt3" data-md-id="q_buyer"><label for="q14_opt3">Module-first подход: изолированные модули в рамках одного приложения</label></li>
+  </ul>
+
+  <h3>15. Методы двухфакторной аутентификации для финансовых операций</h3>
+  <ul>
+    <li><input type="checkbox" id="q15_opt1" data-md-id="q_buyer"><label for="q15_opt1">SMS-коды подтверждения</label></li>
+    <li><input type="checkbox" id="q15_opt2" data-md-id="q_buyer"><label for="q15_opt2">Push-уведомления с действиями</label></li>
+    <li><input type="checkbox" id="q15_opt3" data-md-id="q_buyer"><label for="q15_opt3">Email-коды подтверждения</label></li>
+    <li><input type="checkbox" id="q15_opt4" data-md-id="q_buyer"><label for="q15_opt4">TOTP (Time-based One-Time Password) через приложение</label></li>
+    <li><input type="checkbox" id="q15_opt5" data-md-id="q_buyer"><label for="q15_opt5">Комбинация методов на выбор пользователя</label></li>
+  </ul>
+
+  <h3>16. Уровень сложности NLP обработки команд в чате</h3>
+  <ul>
+    <li><input type="checkbox" id="q16_opt1" data-md-id="q_buyer"><label for="q16_opt1">Простой pattern-matching по ключевым словам</label></li>
+    <li><input type="checkbox" id="q16_opt2" data-md-id="q_buyer"><label for="q16_opt2">Библиотека prose для базового анализа английского текста</label></li>
+    <li><input type="checkbox" id="q16_opt3" data-md-id="q_buyer"><label for="q16_opt3">Специализированная библиотека для русского языка</label></li>
+    <li><input type="checkbox" id="q16_opt4" data-md-id="q_buyer"><label for="q16_opt4">Кастомная ML модель для распознавания намерений</label></li>
+    <li><input type="checkbox" id="q16_opt5" data-md-id="q_buyer"><label for="q16_opt5">Интеграция с внешним NLP-сервисом (Dialogflow, etc.)</label></li>
+  </ul>
+
+  <h3>17. Политика лимитов для финансовых операций</h3>
+  <ul>
+    <li><input type="checkbox" id="q17_opt1" data-md-id="q_buyer"><label for="q17_opt1">Фиксированные лимиты на одну операцию</label></li>
+    <li><input type="checkbox" id="q17_opt2" data-md-id="q_buyer"><label for="q17_opt2">Суточные/месячные лимиты на общую сумму операций</label></li>
+    <li><input type="checkbox" id="q17_opt3" data-md-id="q_buyer"><label for="q17_opt3">Настраиваемые пользователем лимиты</label></li>
+    <li><input type="checkbox" id="q17_opt4" data-md-id="q_buyer"><label for="q17_opt4">Адаптивные лимиты на основе истории и верификации</label></li>
+    <li><input type="checkbox" id="q17_opt5" data-md-id="q_buyer"><label for="q17_opt5">Без лимитов для верифицированных пользователей</label></li>
+  </ul>
+</div>
+
+<div class="section additional">
+  <h2>Дополнительные/технические вопросы</h2>
+
+  <h3>18. Уровень детализации логирования</h3>
+  <ul>
+    <li><input type="checkbox" id="q18_opt1" data-md-id="q_buyer"><label for="q18_opt1">Только ошибки и критические события</label></li>
+    <li><input type="checkbox" id="q18_opt2" data-md-id="q_buyer"><label for="q18_opt2">Полные логи HTTP запросов и ответов</label></li>
+    <li><input type="checkbox" id="q18_opt3" data-md-id="q_buyer"><label for="q18_opt3">Structured logging в JSON формате для анализа</label></li>
+    <li><input type="checkbox" id="q18_opt4" data-md-id="q_buyer"><label for="q18_opt4">Логи бизнес-событий (заказы, платежи, etc.)</label></li>
+  </ul>
+
+  <h3>19. Мониторинг здоровья системы и метрики</h3>
+  <ul>
+    <li><input type="checkbox" id="q19_opt1" data-md-id="q_buyer"><label for="q19_opt1">Базовый эндпоинт /health для проверки БД</label></li>
+    <li><input type="checkbox" id="q19_opt2" data-md-id="q_buyer"><label for="q19_opt2">Расширенный /health с проверкой всех зависимостей</label></li>
+    <li><input type="checkbox" id="q19_opt3" data-md-id="q_buyer"><label for="q19_opt3">Метрики Prometheus для мониторинга производительности</label></li>
+    <li><input type="checkbox" id="q19_opt4" data-md-id="q_buyer"><label for="q19_opt4">Кастомные бизнес-метрики (количество заказов, etc.)</label></li>
+  </ul>
+
+  <h3>20. Формат документации API</h3>
+  <ul>
+    <li><input type="checkbox" id="q20_opt1" data-md-id="q_buyer"><label for="q20_opt1">Swagger/OpenAPI 3.0 с полной спецификацией</label></li>
+    <li><input type="checkbox" id="q20_opt2" data-md-id="q_buyer"><label for="q20_opt2">Swagger/OpenAPI 2.0 для совместимости</label></li>
+    <li><input type="checkbox" id="q20_opt3" data-md-id="q_buyer"><label for="q20_opt3">Альтернативные форматы: API Blueprint, RAML</label></li>
+    <li><input type="checkbox" id="q20_opt4" data-md-id="q_buyer"><label for="q20_opt4">Интерактивная документация с примерами запросов</label></li>
+  </ul>
+
+  <h3>21. Детализация ошибок валидации</h3>
+  <ul>
+    <li><input type="checkbox" id="q21_opt1" data-md-id="q_buyer"><label for="q21_opt1">Единый формат для всех ошибок { "error": "message" }</label></li>
+    <li><input type="checkbox" id="q21_opt2" data-md-id="q_buyer"><label for="q21_opt2">Детальные ошибки с указанием проблемных полей и правил</label></li>
+    <li><input type="checkbox" id="q21_opt3" data-md-id="q_buyer"><label for="q21_opt3">Многоуровневая система ошибок с кодами и категориями</label></li>
+    <li><input type="checkbox" id="q21_opt4" data-md-id="q_buyer"><label for="q21_opt4">Локализованные сообщения об ошибках</label></li>
+  </ul>
+
+  <h3>22. Политика ограничения запросов (Rate Limiting)</h3>
+  <ul>
+    <li><input type="checkbox" id="q22_opt1" data-md-id="q_buyer"><label for="q22_opt1">Без ограничений на этапе MVP</label></li>
+    <li><input type="checkbox" id="q22_opt2" data-md-id="q_buyer"><label for="q22_opt2">Фиксированные квоты на API-ключ/пользователя</label></li>
+    <li><input type="checkbox" id="q22_opt3" data-md-id="q_buyer"><label for="q22_opt3">Адаптивные лимиты на основе нагрузки и поведения</label></li>
+    <li><input type="checkbox" id="q22_opt4" data-md-id="q_buyer"><label for="q22_opt4">Разные лимиты для разных эндпоинтов (строже для платежей)</label></li>
+  </ul>
+
+  <h3>23. Обработка устаревших цен товаров в корзине</h3>
+  <ul>
+    <li><input type="checkbox" id="q23_opt1" data-md-id="q_buyer"><label for="q23_opt1">Цены фиксируются только при оформлении заказа</label></li>
+    <li><input type="checkbox" id="q23_opt2" data-md-id="q_buyer"><label for="q23_opt2">Предупреждение пользователя об изменении цен при оформлении</label></li>
+    <li><input type="checkbox" id="q23_opt3" data-md-id="q_buyer"><label for="q23_opt3">Автоматическое обновление цен в корзине при изменении</label></li>
+    <li><input type="checkbox" id="q23_opt4" data-md-id="q_buyer"><label for="q23_opt4">Резервирование цены на ограниченное время</label></li>
+  </ul>
+
+  <h3>24. Механизм расчета стоимости доставки</h3>
+  <ul>
+    <li><input type="checkbox" id="q24_opt1" data-md-id="q_buyer"><label for="q24_opt1">Фиксированная стоимость для всех заказов</label></li>
+    <li><input type="checkbox" id="q24_opt2" data-md-id="q_buyer"><label for="q24_opt2">Зависимость от суммы заказа (бесплатно от N руб.)</label></li>
+    <li><input type="checkbox" id="q24_opt3" data-md-id="q_buyer"><label for="q24_opt3">Расчет на основе расстояния и веса заказа</label></li>
+    <li><input type="checkbox" id="q24_opt4" data-md-id="q_buyer"><label for="q24_opt4">Интеграция с API служб доставки для расчета</label></li>
+  </ul>
+</div>
+</body>
+</html>
