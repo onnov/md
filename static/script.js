@@ -93,71 +93,116 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Функция для генерации и скачивания Markdown
 function downloadMarkdown() {
-    // Создаем пустой массив для строк Markdown
     const markdownLines = [];
+
     // Добавляем заголовок документа
-    markdownLines.push("# Уточняющие вопросы по ТЗ бэкенда доставки\n");
+    markdownLines.push("# Уточненный список API эндпоинтов для учебного бэкенда\n");
 
-    // Проходим по каждому разделу (section)
-    document.querySelectorAll('.section').forEach(section => {
-        // Получаем заголовок раздела (h2)
-        const sectionTitle = section.querySelector('h2').textContent;
-        // Добавляем его в Markdown
-        markdownLines.push(`\n## ${sectionTitle}\n`);
+    // Обрабатываем только секции с контентом
+    const sections = document.querySelectorAll('.section');
 
-        // Проходим по каждому подразделу (h3) внутри раздела
-        section.querySelectorAll('h3').forEach(subsection => {
-            // Получаем текст подраздела
-            const subsectionTitle = subsection.textContent;
-            // Добавляем его в Markdown
-            markdownLines.push(`### ${subsectionTitle}\n`);
+    sections.forEach(section => {
+        // Обрабатываем заголовок секции
+        const sectionTitle = section.querySelector('h2');
+        if (sectionTitle) {
+            markdownLines.push(`## ${sectionTitle.textContent}\n`);
+        }
 
-            // Находим список (ul), следующий сразу за h3
-            const list = subsection.nextElementSibling;
-            if (list && list.tagName.toLowerCase() === 'ul') {
-                // Проходим по каждому элементу списка (li)
-                list.querySelectorAll('li').forEach(listItem => {
-                    // Находим чекбокс внутри элемента списка
-                    const checkbox = listItem.querySelector('input[type="checkbox"]');
-                    if (checkbox) {
-                        // Определяем, отмечен ли чекбокс
-                        const isChecked = checkbox.checked;
-                        // Получаем текст метки (label) для чекбокса
-                        const label = listItem.querySelector('label');
-                        const labelText = label ? label.textContent.trim() : '';
-
-                        // Формируем строку Markdown для элемента списка
-                        // Используем [x] для отмеченных и [ ] для неотмеченных
-                        const status = isChecked ? 'x' : ' ';
-                        markdownLines.push(`- [${status}] ${labelText}`);
-                    }
-                });
-            }
-            // Добавляем пустую строку после каждого подраздела
-            markdownLines.push('');
+        // Обрабатываем все дочерние элементы секции
+        Array.from(section.children).forEach(child => {
+            processElement(child, markdownLines);
         });
+
+        markdownLines.push(''); // Добавляем пустую строку между секциями
     });
 
     // Объединяем все строки в одну строку Markdown
-    const markdownContent = markdownLines.join('\n');
+    const markdownContent = markdownLines.join('\n').replace(/\n{3,}/g, '\n\n').trim();
 
-    // Создаем Blob (двоичный объект) из строки Markdown
+    // Создаем Blob и скачиваем файл
     const blob = new Blob([markdownContent], { type: 'text/markdown;charset=utf-8;' });
-
-    // Создаем временный URL для Blob
     const url = URL.createObjectURL(blob);
-
-    // Создаем временный элемент <a> для скачивания
     const link = document.createElement('a');
     link.href = url;
-    // Указываем имя файла для скачивания
-    link.download = 'clarifying_questions_backend_delivery.md';
-
-    // Симулируем клик по ссылке для запуска скачивания
+    link.download = 'api_endpoints_documentation.md';
     link.click();
-
-    // Освобождаем созданный URL
     URL.revokeObjectURL(url);
+}
+
+// Вспомогательная функция для обработки элементов
+function processElement(element, markdownLines) {
+    const tag = element.tagName.toLowerCase();
+
+    switch(tag) {
+        case 'h1':
+            markdownLines.push(`# ${element.textContent}\n`);
+            break;
+
+        case 'h2':
+            // Уже обработали выше
+            break;
+
+        case 'h3':
+            markdownLines.push(`### ${element.textContent}\n`);
+            break;
+
+        case 'ul':
+            element.querySelectorAll('li').forEach(listItem => {
+                const checkbox = listItem.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    const isChecked = checkbox.checked;
+                    const label = listItem.querySelector('label');
+                    const labelText = label ? label.textContent.trim() : listItem.textContent.trim();
+                    const status = isChecked ? 'x' : ' ';
+                    markdownLines.push(`- [${status}] ${labelText}`);
+                } else {
+                    // Обычный пункт списка без чекбокса
+                    const text = listItem.textContent.trim();
+                    if (text) {
+                        markdownLines.push(`- ${text}`);
+                    }
+                }
+            });
+            markdownLines.push('');
+            break;
+
+        case 'pre':
+            const code = element.querySelector('code');
+            if (code) {
+                markdownLines.push('```');
+                markdownLines.push(code.textContent);
+                markdownLines.push('```\n');
+            }
+            break;
+
+        case 'p':
+            const text = element.textContent.trim();
+            if (text) {
+                markdownLines.push(`${text}\n`);
+            }
+            break;
+
+        case 'div':
+            // Пропускаем кнопки и обрабатываем только контентные div
+            if (!element.classList.contains('button-container') &&
+                !element.classList.contains('section')) {
+                Array.from(element.children).forEach(child => {
+                    processElement(child, markdownLines);
+                });
+            }
+            break;
+
+        default:
+            // Для других элементов просто добавляем текстовое содержимое
+            if (element.textContent && element.textContent.trim() &&
+                !['script', 'style', 'meta', 'link', 'title'].includes(tag)) {
+                const text = element.textContent.trim();
+                if (text && !markdownLines[markdownLines.length - 1]?.includes(text)) {
+                    markdownLines.push(`${text}\n`);
+                }
+            }
+            break;
+    }
 }
 
 // Добавляем обработчики событий для всех чекбоксов и загружаем состояния при DOMContentLoaded

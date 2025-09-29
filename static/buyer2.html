@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уточненный список API эндпоинтов для учебного бэкенда</title>
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="status" class="status"></div>
+
+<h1>Уточненный список API эндпоинтов для учебного бэкенда</h1>
+
+<!-- Контейнер для кнопок -->
+<div class="button-container">
+    <!-- Кнопка "На главную" -->
+    <a href="/" class="action-button btn-primary">На главную</a>
+    <!-- Кнопка "Скачать Markdown" -->
+    <button id="downloadMarkdownBtn" class="action-button btn-success">Скачать как Markdown</button>
+</div>
+
+<div class="section important">
+    <h2>Основные эндпоинты</h2>
+
+    <h3>1. Пользователи и профиль</h3>
+    <ul>
+        <li><input type="checkbox" id="q1_opt1" data-md-id="q_buyer2"><label for="q1_opt1"><code>GET /users/me</code> - профиль текущего пользователя</label></li>
+        <li><input type="checkbox" id="q1_opt2" data-md-id="q_buyer2"><label for="q1_opt2"><code>PUT /users/me</code> - обновление профиля</label></li>
+    </ul>
+
+    <h3>2. Каталог товаров</h3>
+    <ul>
+        <li><input type="checkbox" id="q2_opt1" data-md-id="q_buyer2"><label for="q2_opt1"><code>GET /products</code> - список товаров с фильтрацией и пагинацией</label></li>
+        <li><input type="checkbox" id="q2_opt2" data-md-id="q_buyer2"><label for="q2_opt2"><code>GET /products/{id}</code> - детальная информация о товаре</label></li>
+        <li><input type="checkbox" id="q2_opt3" data-md-id="q_buyer2"><label for="q2_opt3"><code>GET /categories</code> - список категорий</label></li>
+        <li><input type="checkbox" id="q2_opt4" data-md-id="q_buyer2"><label for="q2_opt4"><code>GET /products/{id}/reviews</code> - отзывы на конкретный товар</label></li>
+        <li><input type="checkbox" id="q2_opt5" data-md-id="q_buyer2"><label for="q2_opt5"><code>GET /products/search</code> - расширенный поиск (опционально)</label></li>
+    </ul>
+
+    <h3>3. Корзина покупок</h3>
+    <ul>
+        <li><input type="checkbox" id="q3_opt1" data-md-id="q_buyer2"><label for="q3_opt1"><code>GET /cart</code> - получить содержимое корзины</label></li>
+        <li><input type="checkbox" id="q3_opt2" data-md-id="q_buyer2"><label for="q3_opt2"><code>POST /cart/add</code> - добавить товар в корзину</label></li>
+        <li><input type="checkbox" id="q3_opt3" data-md-id="q_buyer2"><label for="q3_opt3"><code>POST /cart/remove</code> - удалить товар из корзины</label></li>
+        <li><input type="checkbox" id="q3_opt4" data-md-id="q_buyer2"><label for="q3_opt4"><code>POST /cart/clear</code> - очистить корзину полностью</label></li>
+    </ul>
+
+    <h3>4. Управление заказами</h3>
+    <ul>
+        <li><input type="checkbox" id="q4_opt1" data-md-id="q_buyer2"><label for="q4_opt1"><code>POST /orders</code> - создать новый заказ</label></li>
+        <li><input type="checkbox" id="q4_opt2" data-md-id="q_buyer2"><label for="q4_opt2"><code>GET /orders</code> - список заказов пользователя</label></li>
+        <li><input type="checkbox" id="q4_opt3" data-md-id="q_buyer2"><label for="q4_opt3"><code>GET /orders/{id}</code> - детали конкретного заказа</label></li>
+        <li><input type="checkbox" id="q4_opt4" data-md-id="q_buyer2"><label for="q4_opt4"><code>PUT /orders/{id}/cancel</code> - отмена заказа</label></li>
+    </ul>
+
+    <h3>5. Адреса доставки</h3>
+    <ul>
+        <li><input type="checkbox" id="q5_opt1" data-md-id="q_buyer2"><label for="q5_opt1"><code>GET /addresses</code> - список адресов пользователя</label></li>
+        <li><input type="checkbox" id="q5_opt2" data-md-id="q_buyer2"><label for="q5_opt2"><code>POST /addresses</code> - добавить новый адрес</label></li>
+        <li><input type="checkbox" id="q5_opt3" data-md-id="q_buyer2"><label for="q5_opt3"><code>PUT /addresses/{id}</code> - обновить адрес</label></li>
+        <li><input type="checkbox" id="q5_opt4" data-md-id="q_buyer2"><label for="q5_opt4"><code>DELETE /addresses/{id}</code> - удалить адрес</label></li>
+    </ul>
+
+    <h3>6. Отзывы</h3>
+    <ul>
+        <li><input type="checkbox" id="q6_opt1" data-md-id="q_buyer2"><label for="q6_opt1"><code>POST /reviews</code> - оставить отзыв на товар</label></li>
+        <li><input type="checkbox" id="q6_opt2" data-md-id="q_buyer2"><label for="q6_opt2"><code>GET /reviews/{id}</code> - получить отзыв по ID</label></li>
+        <li><input type="checkbox" id="q6_opt3" data-md-id="q_buyer2"><label for="q6_opt3"><code>DELETE /reviews/{id}</code> - удалить отзыв</label></li>
+    </ul>
+
+    <h3>7. Кошелек и платежи</h3>
+    <ul>
+        <li><input type="checkbox" id="q7_opt1" data-md-id="q_buyer2"><label for="q7_opt1"><code>GET /wallet</code> - баланс и информация о кошельке</label></li>
+        <li><input type="checkbox" id="q7_opt2" data-md-id="q_buyer2"><label for="q7_opt2"><code>GET /transactions</code> - история транзакций</label></li>
+        <li><input type="checkbox" id="q7_opt3" data-md-id="q_buyer2"><label for="q7_opt3"><code>POST /chat</code> - обработка NLP-команд</label></li>
+        <li><input type="checkbox" id="q7_opt4" data-md-id="q_buyer2"><label for="q7_opt4"><code>POST /wallet/topup</code> - пополнение кошелька (опционально)</label></li>
+    </ul>
+
+    <h3>8. Служебные эндпоинты мониторинг и диагностика</h3>
+    <ul>
+        <li><input type="checkbox" id="q8_opt1" data-md-id="q_buyer2"><label for="q8_opt1"><code>GET /health</code> - проверка работоспособности (опционально)</label></li>
+        <li><input type="checkbox" id="q8_opt2" data-md-id="q_buyer2"><label for="q8_opt2"><code>GET /version</code> - версия API (опционально)</label></li>
+    </ul>
+</div>
+
+<div class="section additional">
+    <h2>Технические вопросы реализации</h2>
+
+    <h3>9. Выбор хранилища данных</h3>
+    <ul>
+        <li><input type="checkbox" id="q9_opt1" data-md-id="q_buyer2"><label for="q9_opt1">Файловое хранилище (JSON/CSV)</label></li>
+        <li><input type="checkbox" id="q9_opt2" data-md-id="q_buyer2"><label for="q9_opt2">База данных (PostgreSQL)</label></li>
+    </ul>
+
+    <h3>10. Использование инструментов генерации</h3>
+    <ul>
+        <li><input type="checkbox" id="q10_opt1" data-md-id="q_buyer2"><label for="q10_opt1">Использование ogen (желательно)</label></li>
+        <li><input type="checkbox" id="q10_opt2" data-md-id="q_buyer2"><label for="q10_opt2">Ручная реализация всех обработчиков</label></li>
+    </ul>
+
+    <h3>Пример структуры проекта:</h3>
+    <pre><code>    backend/
+    ├── api/
+    │   └── spec.yaml          # OpenAPI спецификация
+    ├── internal/
+    │   ├── handler/           # Обработчики (генерируются ogen)
+    │   ├── storage/
+    │   │   ├── file/          # Реализация для файлового хранилища
+    │   │   └── postgres/      # Реализация для БД (опционально)
+    │   └── service/           # Бизнес-логика
+    ├── data/                  # Файлы с фейковыми данными
+    │   ├── products.json
+    │   ├── users.json
+    │   └── orders.json
+    └── go.mod
+</code></pre>
+
+    <h3>Ключевые моменты для учебного проекта:</h3>
+    <ul>
+        <li><strong>Простота данных</strong> - готовые фейковые наборы для быстрого старта</li>
+        <li><strong>Четкая документация</strong> - OpenAPI спецификация как единый источник истины</li>
+        <li><strong>Модульность</strong> - возможность постепенного добавления функциональности</li>
+    </ul>
+
+    <h3>Итого: 25-28 эндпоинтов</h3>
+    <p>- оптимальный баланс для охвата всех сценариев из ТЗ без избыточной сложности.</p>
+</div>
+</body>
+</html>
