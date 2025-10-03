@@ -29,6 +29,7 @@
     <ul>
         <li><input type="checkbox" id="q1_opt1" data-md-id="q_buyer2"><label for="q1_opt1"><code>GET /users/me</code> - профиль текущего пользователя</label></li>
         <li><input type="checkbox" id="q1_opt2" data-md-id="q_buyer2"><label for="q1_opt2"><code>PUT /users/me</code> - обновление профиля</label></li>
+        <li><input type="checkbox" id="q1_opt3" data-md-id="q_buyer2"><label for="q1_opt3"><code>DELETE /users/me</code> - удалить профиль (заглушка) ➕</label></li>
     </ul>
 
     <h3>2. Каталог товаров</h3>
@@ -54,6 +55,7 @@
         <li><input type="checkbox" id="q4_opt2" data-md-id="q_buyer2"><label for="q4_opt2"><code>GET /orders</code> - список заказов пользователя</label></li>
         <li><input type="checkbox" id="q4_opt3" data-md-id="q_buyer2"><label for="q4_opt3"><code>GET /orders/{id}</code> - детали конкретного заказа</label></li>
         <li><input type="checkbox" id="q4_opt4" data-md-id="q_buyer2"><label for="q4_opt4"><code>PUT /orders/{id}/cancel</code> - отмена заказа</label></li>
+        <li><input type="checkbox" id="q4_opt5" data-md-id="q_buyer2"><label for="q4_opt5"><code>GET /orders/{id}/receipt</code> - скачать чек ➕</label></li>
     </ul>
 
     <h3>5. Адреса доставки</h3>
@@ -69,6 +71,8 @@
         <li><input type="checkbox" id="q6_opt1" data-md-id="q_buyer2"><label for="q6_opt1"><code>POST /reviews</code> - оставить отзыв на товар</label></li>
         <li><input type="checkbox" id="q6_opt2" data-md-id="q_buyer2"><label for="q6_opt2"><code>GET /reviews/{id}</code> - получить отзыв по ID</label></li>
         <li><input type="checkbox" id="q6_opt3" data-md-id="q_buyer2"><label for="q6_opt3"><code>DELETE /reviews/{id}</code> - удалить отзыв</label></li>
+        <li><input type="checkbox" id="q6_opt4" data-md-id="q_buyer2"><label for="q6_opt4"><code>GET /reviews</code> - список отзывов ➕</label></li>
+        <li><input type="checkbox" id="q6_opt5" data-md-id="q_buyer2"><label for="q6_opt5"><code>POST /reviews/{id}/upload</code> - загрузить изображение (JPEG XL) ➕</label></li>
     </ul>
 
     <h3>7. Кошелек и платежи</h3>
@@ -77,6 +81,7 @@
         <li><input type="checkbox" id="q7_opt2" data-md-id="q_buyer2"><label for="q7_opt2"><code>GET /transactions</code> - история транзакций</label></li>
         <li><input type="checkbox" id="q7_opt3" data-md-id="q_buyer2"><label for="q7_opt3"><code>POST /chat</code> - обработка NLP-команд</label></li>
         <li><input type="checkbox" id="q7_opt4" data-md-id="q_buyer2"><label for="q7_opt4"><code>POST /wallet/topup</code> - пополнение кошелька (опционально)</label></li>
+        <li><input type="checkbox" id="q7_opt5" data-md-id="q_buyer2"><label for="q7_opt5"><code>POST /wallet/transfer</code> - перевод денег между студентами ➕</label></li>
     </ul>
 
     <h3>8. Служебные эндпоинты мониторинг и диагностика</h3>
