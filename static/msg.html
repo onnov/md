@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вопросы по US "Сервис создания кастомных уведомлений"</title>
+
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+<div id="status" class="status"></div>
+
+<h1>Вопросы по US "Сервис создания кастомных уведомлений"</h1>
+
+<p style="color: red">ответы на вопросы не заменят описания US</p>
+<p><a href="https://youtrack.wildberries.ru/issue/WBTECH-2128">WBTECH-2128</a></p>
+
+<!-- Контейнер для кнопок -->
+<div class="button-container">
+    <!-- Кнопка "На главную" -->
+    <a href="/" class="action-button btn-primary">На главную</a>
+    <!-- Кнопка "Скачать Markdown" -->
+    <button id="downloadMarkdownBtn" class="action-button btn-success">Скачать как Markdown</button>
+</div>
+
+<div class="section important">
+    <h2>Цели и назначение</h2>
+
+    <h3>Какова основная цель этого функционала?</h3>
+    <ul>
+        <li><input type="checkbox" id="goal1" data-md-id="q_msg"><label for="goal1">Замена существующих разрозненных мест отправки уведомлений</label></li>
+        <li><input type="checkbox" id="goal2" data-md-id="q_msg"><label for="goal2">Дополнение к текущей системе уведомлений</label></li>
+        <li><input type="checkbox" id="goal3" data-md-id="q_msg"><label for="goal3">Создание централизованного места для управления всеми уведомлениями</label></li>
+        <li><input type="checkbox" id="goal4" data-md-id="q_msg"><label for="goal4">Другое (Нужно описать в задаче)</label></li>
+    </ul>
+
+    <h3>Какие основные сценарии использования вы представляете?</h3>
+    <ul>
+        <li><input type="checkbox" id="scenario1" data-md-id="q_msg"><label for="scenario1">Массовая рассылка важных объявлений</label></li>
+        <li><input type="checkbox" id="scenario2" data-md-id="q_msg"><label for="scenario2">Персональные уведомления для конкретных студентов</label></li>
+        <li><input type="checkbox" id="scenario3" data-md-id="q_msg"><label for="scenario3">Экстренные оповещения</label></li>
+        <li><input type="checkbox" id="scenario4" data-md-id="q_msg"><label for="scenario4">Автоматизация рутинных уведомлений</label></li>
+        <li><input type="checkbox" id="scenario5" data-md-id="q_msg"><label for="scenario5">Другое (Нужно описать в задаче)</label></li>
+    </ul>
+</div>
+
+<div class="section important">
+    <h2>Функциональность</h2>
+
+    <h3>Это должен быть отдельный интерфейс или встроенный функционал?</h3>
+    <ul>
+        <li><input type="checkbox" id="interface1" data-md-id="q_msg"><label for="interface1">Отдельная вкладка/сервис</label></li>
+        <li><input type="checkbox" id="interface2" data-md-id="q_msg"><label for="interface2">Встроенный в существующие разделы (CRM, ЛК)</label></li>
+        <li><input type="checkbox" id="interface3" data-md-id="q_msg"><label for="interface3">И то, и другое в разных местах</label></li>
+        <li><input type="checkbox" id="interface4" data-md-id="q_msg"><label for="interface4">Другое (Нужно описать в задаче)</label></li>
+    </ul>
+
+    <h3>Что именно подразумевается под "кастомными уведомлениями"?</h3>
+    <ul>
+        <li><input type="checkbox" id="custom1" data-md-id="q_msg"><label for="custom1">Только свободный текст (произвольные сообщения)</label></li>
+        <li><input type="checkbox" id="custom2" data-md-id="q_msg"><label for="custom2">Редактирование существующих системных шаблонов</label></li>
+        <li><input type="checkbox" id="custom3" data-md-id="q_msg"><label for="custom3">Создание новых шаблонов сообщений</label></li>
+        <li><input type="checkbox" id="custom4" data-md-id="q_msg"><label for="custom4">И то, и другое</label></li>
+    </ul>
+
+    <h3>Кому можно отправлять сообщения?</h3>
+    <ul>
+        <li><input type="checkbox" id="recipients1" data-md-id="q_msg"><label for="recipients1">Только конкретному студенту (индивидуально)</label></li>
+        <li><input type="checkbox" id="recipients2" data-md-id="q_msg"><label for="recipients2">Группе студентов (произвольный выбор)</label></li>
+        <li><input type="checkbox" id="recipients3" data-md-id="q_msg"><label for="recipients3">Всем студентам курса/направления</label></li>
+        <li><input type="checkbox" id="recipients4" data-md-id="q_msg"><label for="recipients4">В Telegram-каналы курсов</label></li>
+        <li><input type="checkbox" id="recipients5" data-md-id="q_msg"><label for="recipients5">Все варианты выше</label></li>
+    </ul>
+</div>
+
+<div class="section important">
+    <h2>Технические детали</h2>
+
+    <h3>Какие каналы отправки должны быть доступны?</h3>
+    <ul>
+        <li><input type="checkbox" id="channels1" data-md-id="q_msg"><label for="channels1">Email</label></li>
+        <li><input type="checkbox" id="channels2" data-md-id="q_msg"><label for="channels2">Личный кабинет (внутри системы)</label></li>
+        <li><input type="checkbox" id="channels3" data-md-id="q_msg"><label for="channels3">Telegram-бот</label></li>
+        <li><input type="checkbox" id="channels4" data-md-id="q_msg"><label for="channels4">Все каналы одновременно с выбором</label></li>
+        <li><input type="checkbox" id="channels5" data-md-id="q_msg"><label for="channels5">Другое (Нужно описать в задаче)</label></li>
+    </ul>
+
+    <h3>Нужна ли возможность массовой отправки?</h3>
+    <ul>
+        <li><input type="checkbox" id="mass1" data-md-id="q_msg"><label for="mass1">Да, с выбором получателей</label></li>
+        <li><input type="checkbox" id="mass2" data-md-id="q_msg"><label for="mass2">Нет, только индивидуальные сообщения</label></li>
+        <li><input type="checkbox" id="mass3" data-md-id="q_msg"><label for="mass3">Оба варианта в зависимости от ситуации</label></li>
+    </ul>
+</div>
+
+<div class="section additional">
+    <h2>Приоритеты</h2>
+
+    <h3>Что должно быть в первой версии (MVP)?</h3>
+    <ul>
+        <li><input type="checkbox" id="mvp1" data-md-id="q_msg"><label for="mvp1">Базовая отправка кастомных сообщений</label></li>
+        <li><input type="checkbox" id="mvp2" data-md-id="q_msg"><label for="mvp2">Поддержка всех каналов отправки</label></li>
+        <li><input type="checkbox" id="mvp3" data-md-id="q_msg"><label for="mvp3">Массовая рассылка</label></li>
+        <li><input type="checkbox" id="mvp4" data-md-id="q_msg"><label for="mvp4">Управление шаблонами</label></li>
+        <li><input type="checkbox" id="mvp5" data-md-id="q_msg"><label for="mvp5">Другое (Нужно описать в задаче)</label></li>
+    </ul>
+
+    <h3>Кто должен иметь доступ к этому функционалу?</h3>
+    <ul>
+        <li><input type="checkbox" id="access1" data-md-id="q_msg"><label for="access1">Только администраторы</label></li>
+        <li><input type="checkbox" id="access2" data-md-id="q_msg"><label for="access2">HR-менеджеры</label></li>
+        <li><input type="checkbox" id="access3" data-md-id="q_msg"><label for="access3">Преподаватели</label></li>
+        <li><input type="checkbox" id="access4" data-md-id="q_msg"><label for="access4">Все вышеперечисленные</label></li>
+    </ul>
+</div>
+
+<div class="section additional">
+    <h2>Дополнительные вопросы</h2>
+
+    <h3>Нужна ли интеграция с существующими системами?</h3>
+    <ul>
+        <li><input type="checkbox" id="integration1" data-md-id="q_msg"><label for="integration1">Интеграция с текущим Notification Service</label></li>
+        <li><input type="checkbox" id="integration2" data-md-id="q_msg"><label for="integration2">Использование существующих шаблонов уведомлений</label></li>
+        <li><input type="checkbox" id="integration3" data-md-id="q_msg"><label for="integration3">Полностью новая независимая система</label></li>
+    </ul>
+
+    <h3>Какие требования к безопасности?</h3>
+    <ul>
+        <li><input type="checkbox" id="security1" data-md-id="q_msg"><label for="security1">Разграничение прав доступа по ролям</label></li>
+        <li><input type="checkbox" id="security2" data-md-id="q_msg"><label for="security2">Логирование всех отправленных сообщений</label></li>
+        <li><input type="checkbox" id="security3" data-md-id="q_msg"><label for="security3">Ограничение частоты отправки</label></li>
+    </ul>
+</div>
+</body>
+</html>
